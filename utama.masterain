@@ -1,0 +1,32 @@
+## Program Utama MASTERAIN
+## Manifestasi pertama dari kedaulatan nalar digital
+
+arsitektur PenjagaSemesta mulai
+    pondasi (nama) mulai
+        ini.nama = nama
+        ini.kekuatan = 100
+    akhir pondasi
+
+    aksi tampilkanStatus() mulai
+        cetak("Penjaga: " + ini.nama)
+        cetak("Kekuatan: " + ini.kekuatan)
+    akhir aksi
+
+    aksi bertarung() mulai
+        jika (ini.kekuatan > 0) mulai
+            ini.kekuatan = ini.kekuatan - 10
+            cetak(ini.nama + " sedang bertarung!")
+        akhir jika
+        sebaliknya mulai
+            cetak(ini.nama + " kehabisan kekuatan!")
+        akhir sebaliknya
+    akhir aksi
+akhir arsitektur
+
+## Inisialisasi Manifestasi
+mulai_program mulai
+    wira = PenjagaSemesta("Gatotkaca")
+    wira.tampilkanStatus()
+    wira.bertarung()
+    wira.tampilkanStatus()
+akhir_program
