@@ -1,0 +1,158 @@
+/*
+  =============================================================================
+  PROGRAM: JAGAD MASTERAIN (Semesta Raya TANTRA)
+  PENULIS: JULES (Sutradara Nalar)
+  DESKRIPSI: Demonstrasi paripurna bahasa TANTRA yang mencakup seluruh nalar.
+  =============================================================================
+*/
+
+// --- 1. SIFAT (Traits) ---
+sifat Sakti adalah sesuatu yang memiliki:
+    upacara keluarkan_aji(nama_aji: kata) menghasilkan bilangan
+selesai sifat
+
+sifat Berwujud adalah sesuatu yang memiliki:
+    sifat koordinat_x: bilangan
+    sifat koordinat_y: bilangan
+selesai sifat
+
+// --- 2. PATOKAN (Generics) ---
+patokan Kantong untuk T jika T memenuhi (Berwujud):
+    sifat isi: daftar dari T
+
+    upacara simpan(barang: T):
+        isi.tambahkan(ambilkan barang) // Demonstrasi MOVE semantics
+    selesai upacara
+selesai patokan
+
+// --- 3. TRAH (Classes) ---
+trah EntitasDasar:
+    sifat id: kata
+    peristiwa kelahiran (id_baru: kata):
+        id adalah id_baru
+    selesai peristiwa
+selesai trah
+
+trah masterain menjelma dari EntitasDasar, Sakti:
+    sifat nama: kata
+    sifat tenaga_dalam: bilangan
+    sifat posisi_x: bilangan
+    sifat posisi_y: bilangan
+
+    peristiwa kelahiran (nama_pahlawan: kata):
+        id adalah "MSTR-" + nama_pahlawan
+        nama adalah nama_pahlawan
+        tenaga_dalam adalah 100
+        posisi_x adalah 0
+        posisi_y adalah 0
+    selesai peristiwa
+
+    upacara keluarkan_aji(nama_aji: kata) menghasilkan bilangan:
+        tanya:
+            bila nama_aji adalah "Brajamusti":
+                tenaga_dalam adalah tenaga_dalam - 20
+                menghasilkan 500
+            bila nama_aji adalah "Gelap Ngampar":
+                tenaga_dalam adalah tenaga_dalam - 50
+                menghasilkan 1500
+            lainnya:
+                menghasilkan 10
+        selesai tanya
+    selesai upacara
+
+    upacara bermeditasi(menit: bilangan) dengan sabar menghasilkan kata:
+        tunggu sampai tugaskan Janji.hening(menit) terpenuhi
+        tenaga_dalam adalah tenaga_dalam + (menit * 2)
+        menghasilkan "Meditasi selesai. Tenaga dalam pulih menjadi " + tenaga_dalam.ke_kata()
+    selesai upacara
+selesai trah
+
+// --- 4. RAJAH (Metaprogramming) ---
+rajah Pencatat untuk trah:
+    hasilkan kode:
+        upacara log_status():
+            Cetak("Status entitas terpantau.")
+        selesai upacara
+    selesai kode
+selesai rajah
+
+terapkan rajah Pencatat untuk "trah" pada masterain
+
+// --- 5. NALAR WISESA (Logic Programming) ---
+pengetahuan SilsilahKerajaan:
+    pastikan: raja(Prabu_Siliwangi)
+    pastikan: putra(Prabu_Siliwangi, Raden_Kian_Santang)
+    pastikan: sakti(Raden_Kian_Santang, "Pedang Langit")
+
+    kaidahkan: ahli_waris(X, Y) bilamana: raja(Y) dan putra(Y, X)
+    kaidahkan: rekan_seperjuangan(A, B) bilamana: sakti(A, S) dan sakti(B, S)
+selesai pengetahuan
+
+// --- 6. CIPTA ADNYANA (AI Agent) ---
+cipta SangHyangWidi:
+    jala NalarSemesta:
+        lapis masukan: 1024 simpul
+        lapis tersembunyi: 512 simpul
+        lapis tersembunyi: 256 simpul
+        lapis keluaran: 128 simpul
+    selesai jala
+
+    upacara amati(keadaan: apapun):
+        // Proses sensorik lingkungan
+    selesai upacara
+
+    upacara belajar(pengalaman: daftar dari kata):
+        latih NalarSemesta menggunakan data: pengalaman
+    selesai upacara
+
+    upacara minta_nasihat(pertanyaan: kata) menghasilkan kata:
+        wangsit adalah minta wangsit dari NalarSemesta untuk pertanyaan
+        menghasilkan wangsit
+    selesai upacara
+selesai cipta
+
+// --- 7. KURUNGAN (Closures) ---
+upacara buat_mantra_penguat(tambahan: bilangan) menghasilkan kurungan:
+    menghasilkan kurungan (awal: bilangan) mengingat tambahan:
+        menghasilkan awal + tambahan
+    selesai kurungan
+selesai upacara
+
+// --- 8. ADEGAN UTAMA (Main Execution) ---
+upacara adegan_utama() dengan sabar:
+    // Inisialisasi
+    sang_pahlawan adalah masterain("Gatotkaca")
+    dewa_kebijakan adalah cipta SangHyangWidi
+
+    // Alur Sabar & Janji
+    Cetak("Memulai perjalanan spiritual...")
+    janji_meditasi adalah tugaskan sang_pahlawan.bermeditasi(10)
+
+    // Pemrosesan Logika
+    tanyakan dalam SilsilahKerajaan dengan jelajah merambah:
+        ahli_waris(Siapa, Prabu_Siliwangi)
+    selesai tanyakan
+
+    // Tanya-Bila (Branching)
+    tanya:
+        bila janji_meditasi berhasil dengan kabar:
+            Cetak(kabar)
+        bila janji_meditasi gagal dengan rintangan:
+            Cetak("Meditasi terganggu: " + rintangan)
+    selesai tanya
+
+    // Penggunaan Kurungan
+    mantra_sakti adalah buat_mantra_penguat(100)
+    kekuatan_baru adalah mantra_sakti(sang_pahlawan.keluarkan_aji("Brajamusti"))
+
+    // Move Semantics
+    pusaka_langit adalah "Keris Empu Gandring"
+    hibahkan pusaka_langit ke sang_pahlawan // pusaka_langit sekarang kosong
+
+    // AI Inference
+    saran adalah dewa_kebijakan.minta_nasihat("Bagaimana cara mengalahkan angkara murka?")
+    Cetak("Wangsit Dewa: " + saran)
+
+    // Selesai
+    Cetak("Tugas selesai. Rahayu.")
+selesai upacara
